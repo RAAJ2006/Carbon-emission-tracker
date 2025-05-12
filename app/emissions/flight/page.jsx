@@ -109,11 +109,18 @@ const FlightEmission = () => {
         setError(null);
 
         const requestData = {
+            // type: "flight",
+            // passengers: parseInt(passengers),
+            // legs: [
+            //     { departure_airport: departureAirport, destination_airport: destinationAirport },
+            //     { departure_airport: destinationAirport, destination_airport: departureAirport }
+            // ]
             type: "flight",
             passengers: parseInt(passengers),
-            legs: [
-                { departure_airport: departureAirport, destination_airport: destinationAirport },
-                { departure_airport: destinationAirport, destination_airport: departureAirport }
+            legs: [{ departure_airport: departureAirport, destination_airport: destinationAirport },
+            {
+                departure_airport: destinationAirport, destination_airport: departureAirport
+            }
             ]
         };
 
@@ -176,69 +183,68 @@ const FlightEmission = () => {
 
             ) : (
                 <form
-                onSubmit={handleSubmit}
-                className="max-w-md mx-auto p-8 bg-gradient-to-br from-gray-800 to-gray-900 text-white rounded-lg shadow-lg space-y-6"
-            >
-                <h2 className="text-2xl font-semibold text-center">Flight Emission Calculator</h2>
-    
-                <div className="space-y-4">
-                    <label className="block">
-                        <span className="text-sm font-medium">Departure Airport</span>
-                        <select
-                            value={departureAirport}
-                            onChange={(e) => setDepartureAirport(e.target.value)}
-                            required
-                            className="mt-1 w-full px-4 py-2 bg-gray-700 rounded-lg text-white focus:ring-2 focus:ring-blue-400 outline-none"
-                        >
-                            <option value="" disabled>Select Airport</option>
-                            {airportArray.map((airport) => (
-                                <option key={airport.code} value={airport.code} className="text-black">
-                                    {airport.name}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-    
-                    <label className="block">
-                        <span className="text-sm font-medium">Destination Airport</span>
-                        <select
-                            value={destinationAirport}
-                            onChange={(e) => setDestinationAirport(e.target.value)}
-                            required
-                            className="mt-1 w-full px-4 py-2 bg-gray-700 rounded-lg text-white focus:ring-2 focus:ring-blue-400 outline-none"
-                        >
-                            <option value="" disabled>Select Airport</option>
-                            {airportArray.map((airport) => (
-                                <option key={airport.code} value={airport.code} className="text-black">
-                                    {airport.name}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-    
-                    <label className="block">
-                        <span className="text-sm font-medium">Passengers</span>
-                        <input
-                            type="number"
-                            value={passengers}
-                            onChange={(e) => setPassengers(e.target.value)}
-                            required
-                            min="1"
-                            className="mt-1 w-full px-4 py-2 bg-gray-700 rounded-lg text-white focus:ring-2 focus:ring-blue-400 outline-none"
-                        />
-                    </label>
-                </div>
-    
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className={`w-full py-3 mt-4 font-semibold rounded-lg transition-colors ${
-                        loading ? 'bg-blue-600 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
-                    }`}
+                    onSubmit={handleSubmit}
+                    className="max-w-md mx-auto p-8 bg-gradient-to-br from-gray-800 to-gray-900 text-white rounded-lg shadow-lg space-y-6"
                 >
-                    {loading ? 'Calculating...' : 'Calculate Emission'}
-                </button>
-            </form>
+                    <h2 className="text-2xl font-semibold text-center">Flight Emission Calculator</h2>
+
+                    <div className="space-y-4">
+                        <label className="block">
+                            <span className="text-sm font-medium">Departure Airport</span>
+                            <select
+                                value={departureAirport}
+                                onChange={(e) => setDepartureAirport(e.target.value)}
+                                required
+                                className="mt-1 w-full px-4 py-2 bg-gray-700 rounded-lg text-white focus:ring-2 focus:ring-blue-400 outline-none"
+                            >
+                                <option value="" disabled>Select Airport</option>
+                                {airportArray.map((airport) => (
+                                    <option key={airport.code} value={airport.code} className="text-black">
+                                        {airport.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
+
+                        <label className="block">
+                            <span className="text-sm font-medium">Destination Airport</span>
+                            <select
+                                value={destinationAirport}
+                                onChange={(e) => setDestinationAirport(e.target.value)}
+                                required
+                                className="mt-1 w-full px-4 py-2 bg-gray-700 rounded-lg text-white focus:ring-2 focus:ring-blue-400 outline-none"
+                            >
+                                <option value="" disabled>Select Airport</option>
+                                {airportArray.map((airport) => (
+                                    <option key={airport.code} value={airport.code} className="text-black">
+                                        {airport.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
+
+                        <label className="block">
+                            <span className="text-sm font-medium">Passengers</span>
+                            <input
+                                type="number"
+                                value={passengers}
+                                onChange={(e) => setPassengers(e.target.value)}
+                                required
+                                min="1"
+                                className="mt-1 w-full px-4 py-2 bg-gray-700 rounded-lg text-white focus:ring-2 focus:ring-blue-400 outline-none"
+                            />
+                        </label>
+                    </div>
+
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className={`w-full py-3 mt-4 font-semibold rounded-lg transition-colors ${loading ? 'bg-blue-600 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
+                            }`}
+                    >
+                        {loading ? 'Calculating...' : 'Calculate Emission'}
+                    </button>
+                </form>
             )}
 
             {error && <p style={{ color: 'red' }}>{error}</p>}

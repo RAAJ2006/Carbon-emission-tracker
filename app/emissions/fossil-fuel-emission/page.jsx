@@ -30,6 +30,8 @@ const FossilFuelsPage = () => {
         body: JSON.stringify(requestData),
       });
 
+
+
       const result = await response.json();
 
       if (response.ok) {
